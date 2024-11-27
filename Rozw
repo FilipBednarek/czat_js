@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h2>Chat</h2>
+    </header>
+    <main>
+        <aside>
+            <section>
+                <h3>Chaty</h3>
+                <ul>
+                    <li>Ogólny</li>
+                    <li>Tematyczne
+                        <ol>
+                            <li>Turystyczny</li>
+                            <li>Żeglarski</li>
+                            <li>Filatelistyczny</li>
+                            <li>Hodowla zwierzątek domowych</li>
+                        </ol>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Uczestnicy</h3>
+                <p>Jolanta Nowak</p>
+                <img src="Jolka.jpg" alt="Jolanta Nowak">
+                <p>Krzysztof Łukasiński</p>
+                <img src="Krzysiek.jpg" alt="Krzysztof Łukasiński">
+            </section>
+        </aside>
+        <section>
+            <div id="chat">
+                <div class="message jolka">
+                    <img src="Jolka.jpg" alt="Jolanta">
+                    <p>Cześć, idziesz jutro do kina?</p>
+                </div>
+                <div class="message krzysiek">
+                    <img src="Krzysiek.jpg" alt="Krzysztof">
+                    <p>Tak! A ty?</p>
+                </div>
+            </div>
+            <div>
+                <label for="messageInput">Wpisz wiadomość:</label>
+                <input type="text" id="messageInput">
+                <button onclick="sendMessage()">Wyślij</button>
+            </div>
+            <button onclick="generateRandomResponse()">Generuj losową odpowiedź</button>
+        </section>
+    </main>
+    <footer>
+        <h5>Chat wykonał: [Twój numer zdającego]</h5>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+* {
+    font-family: Garamond;
+}
+header {
+    background-color: Tomato;
+    color: white;
+    text-align: center;
+    width: 80%;
+    height: 80px;
+}
+main {
+    display: flex;
+}
+aside {
+    background-color: Coral;
+    width: 20%;
+    height: 680px;
+}
+footer {
+    background-color: Tomato;
+    color: white;
+    text-align: center;
+}
+img {
+    border-radius: 50%;
+    margin: 0 10px;
+}
+#chat {
+    border: 1px solid Tomato;
+    height: 470px;
+    overflow-y: scroll;
+}
+.message {
+    border-radius: 5px;
+    width: 90%;
+    height: 70px;
+    margin: 2%;
+    padding: 3px;
+}
+.jolka {
+    background-color: #EEE;
+    text-align: left;
+}
+.krzysiek {
+    background-color: #CCC;
+    text-align: right;
+}
+
+
+
+
+
+const randomResponses = [
+    "Świetnie!",
+    "Kto gra główną rolę?",
+    "Lubisz filmy Tego reżysera?",
+    "Będę 10 minut wcześniej",
+    "Może kupimy sobie popcorn?",
+    "Ja wolę Colę",
+    "Zaproszę jeszcze Grześka",
+    "Tydzień temu też byłem w kinie na Diunie",
+    "Ja funduję bilety"
+];
+
+function sendMessage() {
+    const messageInput = document.getElementById('messageInput').value;
+    const chat = document.getElementById('chat');
+    const messageBlock = `<div class="message jolka">
+                            <img src="Jolka.jpg" alt="Jolanta">
+                            <p>${messageInput}</p>
+                          </div>`;
+    chat.innerHTML += messageBlock;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function generateRandomResponse() {
+    const randomIndex = Math.floor(Math.random() * randomResponses.length);
+    const chat = document.getElementById('chat');
+    const messageBlock = `<div class="message krzysiek">
+                            <img src="Krzysiek.jpg" alt="Krzysztof">
+                            <p>${randomResponses[randomIndex]}</p>
+                          </div>`;
+    chat.innerHTML += messageBlock;
+    chat.scrollTop = chat.scrollHeight;
+}
